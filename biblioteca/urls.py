@@ -2,7 +2,6 @@ from django.urls import path
 from . import views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-
 urlpatterns = []
 
 # Endpoints JWT
@@ -16,4 +15,8 @@ urlpatterns += [
     path('preg6/<int:pk>/',views.RenovacionFechaPenalizacionAPIView.as_view()),
     path('preg7/',views.PerfilAPIView.as_view()),
     path('preg8/<uuid:uuidpk>/user/<int:pk>/',views.PrestarLibroAPIView.as_view()),
+]
+
+urlpatterns += [
+    path('usuarios/', views.UsuariosAPIView.as_view(), name='usuarios'), 
 ]
