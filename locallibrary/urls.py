@@ -41,9 +41,11 @@ urlpatterns += [
     path('',RedirectView.as_view(url="/catalog/",permanent=True)),
 ]
 
+# Add url for API aplication..
 urlpatterns += [
     path('biblioteca/',include('biblioteca.urls')),
 ]
 
+# REMEMBER:
 # Por si te dice que ese puerto (8000) esta en uso:
 #  sudo lsof -i -P -n | grep LISTEN
