@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
-
+from django.contrib.auth.models import User
+from rest_framework.permissions import IsAdminUser
 
 from catalog.models import *
 from .permissions import *
@@ -55,3 +56,15 @@ class PrestarLibroAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Como un pequeño extra puedo añadir un  endpoint que devuelva los usuarios
+# desde el modelo nativo de Django. Este endpoint podrá ser consultado por 
+# el un usuario con acceso al portal de staff por decisiones de diseño.
+class UsuariosAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        usuarios = User.objects.all()
+        serializer = UserSerializer(usuarios, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
