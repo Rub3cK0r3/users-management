@@ -1,45 +1,38 @@
 # Library Management System
 
-A modern full-stack application for managing a library's book collection, with a React TypeScript frontend and Django REST API backend.
+A full-stack library management app built with a **React + TypeScript frontend** and a **Django REST API backend**.
+
+Not just a school project anymore — this started as a Django exam and slowly turned into something closer to a real full-stack app.
 
 ## 🎯 Overview
 
-This project evolved from an educational Django exam into a modern full-stack application with:
-- ✨ Modern React TypeScript frontend with responsive UI
-- 🚀 Django REST API backend with JWT authentication
-- 📚 Complete library management features
-- 👥 User profiles and permission system
-- 🎨 Clean, intuitive user interface
+What started as an educational project ended up evolving into a complete system with:
+
+- ✨ _React + TypeScript SPA_ with a responsive UI
+- 🚀 _Django REST API_ with JWT authentication
+- 📚 Full library management (books, authors, borrowing system)
+- 👥 User profiles + permissions
+- 🎨 Clean UI with a simple, custom design system
 
 ## 📁 Project Structure
 
 ```
+
 users-management/
-├── frontend/                # React TypeScript SPA
-│   ├── src/
-│   │   ├── pages/          # Page components (Home, Books, Authors, etc.)
-│   │   ├── components/     # Reusable components (Navigation, etc.)
-│   │   ├── services/       # API client with JWT handling
-│   │   ├── hooks/          # Custom hooks (useAuth)
-│   │   ├── types/          # TypeScript types and interfaces
-│   │   └── styles/         # Global CSS and component styles
-│   ├── package.json
-│   └── README.md           # Frontend documentation
-│
-├── backend/                 # Django REST API
-│   ├── locallibrary/        # Django project settings
-│   ├── catalog/             # Main app (Books, Authors, Instances)
-│   ├── biblioteca/          # API app (Advanced features)
-│   ├── manage.py
-│   ├── requirements.txt
-│   └── README.md            # Backend documentation
-│
-└── README.md                # This file
-```
+├── frontend/        → React + TypeScript SPA
+├── backend/         → Django REST API
+└── README.md        → you are here
+
+````
+
+Inside each part:
+
+- frontend → pages, components, hooks, API client, styles  
+- backend → Django apps, REST API, auth, models
 
 ## 🚀 Quick Start
 
-### Backend Setup
+### Backend
 
 ```bash
 cd backend
@@ -47,11 +40,12 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
-```
+````
 
-Backend will run at `http://localhost:8000`
+Runs on:
+`http://localhost:8000`
 
-### Frontend Setup
+### Frontend
 
 ```bash
 cd frontend
@@ -59,221 +53,195 @@ npm install
 npm run dev
 ```
 
-Frontend will run at `http://localhost:5173` (Vite) or `http://localhost:3000` (if configured)
+Runs on:
+`http://localhost:5173`
 
 ## ✨ Features
 
-### 📖 Book Management
-- Browse complete book catalog
-- View detailed book information
-- Add, edit, delete books
-- Track book instances and their status
+### 📖 Books
 
-### ✍️ Author Management
-- Manage author information
-- Birth and death date tracking
-- Associated book listings
+* Browse full catalog
+* View details
+* Create / edit / delete books
+* Track availability
 
-### 👥 User Profiles
-- User profile information
-- Address and location details
-- Permission management
-- Penalty system for overdue items
+### ✍️ Authors
 
-### 📚 Borrowing System
-- Track borrowed books
-- Due date management
-- Overdue detection
-- Borrower information
+* Manage authors
+* Birth / death dates
+* Linked books
 
-### 🔐 Authentication & Authorization
-- JWT-based authentication
-- User roles and permissions
-- Permission assignment per user
-- Secure token refresh mechanism
+### 👥 Users
 
-## 🛠️ Technology Stack
+* Profiles with extra info
+* Permissions system
+* Basic penalty logic
+
+### 📚 Borrowing system
+
+* Track borrowed books
+* Due dates
+* Overdue detection
+
+### 🔐 Auth
+
+* JWT login system
+* Protected routes
+* Token refresh handling
+
+## 🛠️ Tech Stack
 
 ### Frontend
-- **React 18** - UI framework
-- **TypeScript** - Type safety
-- **Vite** - Build tool
-- **React Router** - Client-side routing
-- **Axios** - HTTP client
-- **CSS3** - Styling (no frameworks)
+
+* React 18
+* TypeScript
+* Vite
+* React Router
+* Axios
+* Vanilla CSS
 
 ### Backend
-- **Django 6.0** - Web framework
-- **Django REST Framework** - API
-- **djangorestframework-simplejwt** - JWT auth
-- **django-cors-headers** - CORS support
-- **SQLite** - Database
 
-## 📖 API Documentation
+* Django 6
+* Django REST Framework
+* SimpleJWT
+* CORS headers
+* SQLite (dev)
 
-### Authentication
-```bash
+## 📖 API (quick look)
+
+### Login
+
+```http
 POST /biblioteca/login/
+```
+
+```json
 {
   "username": "user",
   "password": "pass"
 }
 ```
 
-Returns:
+Response:
+
 ```json
 {
-  "access": "eyJ0eXAiOiJKV1Q...",
-  "refresh": "eyJ0eXAiOiJKV1Q..."
+  "access": "jwt_token...",
+  "refresh": "jwt_token..."
 }
 ```
 
-### Main API Endpoints
+### Main endpoints
 
 **Books**
-- `GET /catalog/api/books/` - List books
-- `POST /catalog/api/books/` - Create book
-- `GET /catalog/api/books/{id}/` - Retrieve book
-- `PUT /catalog/api/books/{id}/` - Update book
-- `DELETE /catalog/api/books/{id}/` - Delete book
+
+* GET /catalog/api/books/
+* POST /catalog/api/books/
+* GET /catalog/api/books/{id}/
+* PUT /catalog/api/books/{id}/
+* DELETE /catalog/api/books/{id}/
 
 **Authors**
-- `GET /catalog/api/authors/` - List authors
-- `POST /catalog/api/authors/` - Create author
-- `GET /catalog/api/authors/{id}/` - Retrieve author
-- `PUT /catalog/api/authors/{id}/` - Update author
-- `DELETE /catalog/api/authors/{id}/` - Delete author
 
-**Book Instances**
-- `GET /catalog/api/bookinstances/` - List instances
-- `GET /catalog/api/bookinstances/{id}/` - Retrieve instance
-- `PATCH /catalog/api/bookinstances/{id}/` - Update instance
+* GET /catalog/api/authors/
+* POST /catalog/api/authors/
 
-**User Profiles**
-- `GET /catalog/api/perfiles/` - List profiles
-- `GET /biblioteca/preg7/` - Advanced search
+**Instances**
 
-## 🎨 Design System
+* GET /catalog/api/bookinstances/
+* PATCH /catalog/api/bookinstances/{id}/
 
-The frontend uses a custom CSS design system with:
-- **Color Palette**: Primary (#4f46e5), Secondary (#06b6d4), Success (#10b981), Danger (#ef4444)
-- **Responsive Grid**: Mobile-first approach
-- **Utility Classes**: Consistent spacing and styling
-- **Dark Mode Ready**: Easy to implement
+## 🎨 UI Notes
 
-## 📝 Pages & Components
+Nothing fancy here — just a custom CSS setup:
 
-### Pages
-1. **HomePage** - Welcome and feature overview
-2. **LoginPage** - User authentication
-3. **BooksPage** - Browse and manage books
-4. **AuthorsPage** - Browse and manage authors
-5. **MyBooksPage** - User's borrowed books
-6. **ProfilesPage** - User profiles and permissions
+* mobile-first layout
+* flex + grid
+* simple color system
+* no UI frameworks
 
-### Components
-- **Navigation** - Main navigation bar with auth status
+## 🔒 Security
 
-## 🔒 Security Features
+* JWT authentication
+* role-based permissions
+* CORS enabled for frontend
+* token refresh flow
 
-- JWT token-based authentication
-- CORS protection
-- CSRF token handling
-- Permission-based access control
-- Secure token refresh with automatic re-authentication
+## 📊 Models (core idea)
 
-## 📊 Database Models
+* User → authentication base
+* Book → main catalog
+* Author → book creators
+* BookInstance → physical copies
+* Perfil → extended user data
+* PermisoE → permissions layer
 
-### Core Models
-- **User** - Django built-in user model
-- **Author** - Author information
-- **Book** - Book details
-- **Genre** - Book genre classification
-- **Language** - Original language tracking
-- **BookInstance** - Physical book tracking
-- **Perfil** - Extended user profile
-- **PermisoE** - Custom permission system
+## 🔄 Workflow (how it grew)
 
-## 🔄 Development Workflow
+When adding features:
 
-### Adding a New Feature
+1. backend model
+2. serializer
+3. viewset
+4. frontend page
+5. API call
+6. route added
 
-1. **Backend**: Create model and serializer
-2. **Backend**: Create viewset and register in router
-3. **Frontend**: Add page component
-4. **Frontend**: Create API service methods
-5. **Frontend**: Add route in App.tsx
-6. **Frontend**: Create form/list components
+## 🧠 Notes
 
-### Common Commands
+* SQLite is just for dev
+* Django templates still exist but are legacy now
+* backend and frontend are fully separated
 
-**Backend**
-```bash
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
-```
+## 📱 Responsive
 
-**Frontend**
-```bash
-npm run dev      # Development
-npm run build    # Production build
-npm run preview  # Preview build
-```
+Works on mobile + desktop:
 
-## 📱 Responsive Design
+* responsive layout
+* touch-friendly UI
+* adaptive navigation
 
-The application is fully responsive:
-- Mobile-first approach
-- Flexbox and CSS Grid layouts
-- Touch-friendly interface
-- Adaptive navigation
+## 🚀 Performance
 
-## 🚀 Performance Optimizations
+* basic code splitting (React Router)
+* optimized Django queries
+* pagination support in API
 
-- **Frontend**: Code splitting with React Router
-- **Frontend**: CSS minification
-- **Backend**: Database indexing
-- **Backend**: Query optimization with select_related/prefetch_related
-- **API**: DRF pagination and filtering
 
-## 🐛 Known Limitations
+## 🐛 Limitations
 
-- SQLite for development only (use PostgreSQL in production)
-- Legacy template views kept for backward compatibility
-- Admin panel still uses Django templates
+* not production-ready DB setup (yet)
+* some legacy Django views still there
+* admin still uses default Django UI
 
-## 📚 Documentation
 
-- [Frontend README](./frontend/README.md) - Frontend-specific details
-- [Backend README](./backend/README.md) - Backend-specific details
+## 🎓 Context
 
-## 🎓 Educational Context
+This started as a Django exam project and slowly turned into a full-stack practice app covering:
 
-This project started as a Django exam and has evolved into a modern full-stack application showcasing:
-- Modern frontend development with React and TypeScript
-- RESTful API design with Django REST Framework
-- JWT authentication and authorization
-- Database design and ORM usage
-- Frontend-backend integration
+* REST API design
+* React SPA architecture
+* authentication flows
+* frontend/backend separation
+
 
 ## 🤝 Contributing
 
-When contributing:
-1. Follow the existing code structure
-2. Add TypeScript types for new frontend code
-3. Write meaningful commit messages
-4. Test both frontend and backend
-5. Update relevant documentation
+If you touch it:
+
+* keep structure consistent
+* use TypeScript types
+* don’t break backend contracts
+* test both sides
+* don’t leave half features
+
 
 ## 📄 License
 
-This is an educational project. See original README note below.
+Educational project — not meant for production use.
 
----
 
-> [!WARNING]
-> For newcomers, this is part of my educational journey
-> for more visit this profile:
-> https://github.com/RubenMurciaeduca
+> ⚠️ Note
+> This is part of my learning path.
+> More here: [https://github.com/RubenMurciaeduca](https://github.com/RubenMurciaeduca)
